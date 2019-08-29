@@ -1,3 +1,5 @@
+import os
+
 checklist = list()
 
 # CREATE
@@ -8,7 +10,7 @@ def create(item):
 # READ
 def read(index):
     # Read code here
-    return checklist[index]
+    print(checklist[index])
 
 # UPDATE
 def update(index, item):
@@ -26,39 +28,55 @@ def list_all_items():
         print("{} {}".format(index, list_item))
         index += 1
 
-#def mark_completed(index):
-    # Add code here that marks an item as completed
+def mark_completed(index):
+    #Add code here that marks an item as completed
+    i = 0
+    while(i < len(checklist)):
+        if(i == index):
+            print("√ {}".format(checklist[i]))
+        else:
+            print("  {}".format(checklist[i]))
+        i += 1
 
 def user_input(prompt):
     # the input function will display a message in the terminal
     # and wait for user input.
-    user_input = raw_input(prompt)
+    user_input = input(prompt)
     return user_input
 
 def select(function_code):
     # Create item
-    if function_code == "C":
-        input_item = user_input("Input item:")
+    if function_code == "C" or function_code == "c":
+        input_item = user_input("Input item:\n")
         create(input_item)
+        return True
 
     # Read item
-    elif function_code == "R":
-        item_index = int(user_input("Index Number?"))
+    elif function_code == "R" or function_code == "r":
+        item_index = int(user_input("Index Number?\n"))
 
         # Remember that item_index must actually exist or our program will crash.
         read(item_index)
+        return True
 
     # Print all items
-    elif function_code == "P":
+    elif function_code == "P" or function_code == "p":
         list_all_items()
+        return True
 
-    elif function_code == "Q":
+    #mark item as completed
+    elif function_code == "M" or function_code == "m":
+        list_all_items()
+        mark_completed(int(user_input("Mark which item are completed(by index):\n")))
+        return True
+
+    elif function_code == "Q" or function_code == "q":
         # This is where we want to stop our loop
         return False
 
     # Catch all
     else:
-        print("Unknown Option")
+        print("Unknown Option\n")
         return True
 
 def test():
@@ -90,9 +108,8 @@ def test():
     user_value = user_input("Please Enter a value:")
     print(user_value)
 
-test()
-
+#test()
+# QUESTION:
 running = True
 while running:
-    selection = user_input("Press C to add to list, R to Read from list, P to display list, and Q to quit\n")
-    running = select(selection)
+    running = select(user_input("Press C to add to list, R to Read from list, P to display list, M to mark an item as completed, and Q to quit\n"))
