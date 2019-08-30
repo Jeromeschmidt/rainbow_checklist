@@ -22,6 +22,9 @@ def destroy(index):
     # Destroy code here
     checklist.pop(index)
 
+def error_message():
+    print("Uh-oh, looks like theres no item there!")
+
 def list_all_items():
     index = 0
     for list_item in checklist:
@@ -54,9 +57,12 @@ def select(function_code):
     # Read item
     elif function_code == "R" or function_code == "r":
         item_index = int(user_input("Index Number?\n"))
-
         # Remember that item_index must actually exist or our program will crash.
-        read(item_index)
+        if (item_index >= len(checklist)):
+            error_message();
+        else:
+            read(item_index)
+
         return True
 
     # Print all items
@@ -68,6 +74,22 @@ def select(function_code):
     elif function_code == "M" or function_code == "m":
         list_all_items()
         mark_completed(int(user_input("Mark which item are completed(by index):\n")))
+        return True
+
+    elif function_code == "U" or function_code == "u":
+        list_all_items()
+        to_change = int(user_input("Which item would you like to change?(by index):\n"))
+        if to_change >= len(checklist):
+            error_message();
+        else:
+            change_to = user_input("What would like to change it to?:\n")
+            update(to_change, change_to);
+
+        return True
+        
+    elif function_code == "D" or function_code == "d":
+        list_all_items()
+        destroy(int(user_input("Take which item out of the checklist?(by index):\n")))
         return True
 
     elif function_code == "Q" or function_code == "q":
@@ -112,4 +134,4 @@ def test():
 # QUESTION:
 running = True
 while running:
-    running = select(user_input("Press C to add to list, R to Read from list, P to display list, M to mark an item as completed, and Q to quit\n"))
+    running = select(user_input("Press C to add to list, R to Read from list, P to display list, U to update an item, M to mark an item as completed, D to take and item out of the checklist, and Q to quit\n"))
