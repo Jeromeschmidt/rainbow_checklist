@@ -8,7 +8,10 @@ Contains the following options:
 - P : display list of items in checklist
 - U : update an item at a specific index
 - M : mark an item as completed
+- X : to unmark an item as complete
 - D : to delete a specific object
+- T : to clear the terminal
 - Q : to quit programs
 
 Program also displays error message for invalid index
+Program also displays colored text in the terminal
