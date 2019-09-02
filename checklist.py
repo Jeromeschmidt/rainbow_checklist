@@ -164,7 +164,7 @@ def test():
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
-    OKGREEN = '\033[91m'
+    OKGREEN = '\033[92m'
     WARNING = '\033[88m'
     FAIL = '\033[91m'
     ENDC = '\033[0m'
@@ -174,9 +174,7 @@ class bcolors:
 # QUESTION:
 running = True
 while running:
-    print(bcolors.UNDERLINE + "Warning: No active frommets remain. Continue?"
-      + bcolors.ENDC)
-    running = select(user_input("Press\n \
+    running = select(user_input(bcolors.OKGREEN + "Press: \n \
     C to add to list,\n \
     R to Read from list,\n \
     P to display list,\n \
@@ -185,4 +183,4 @@ while running:
     X to unmark an item as completed,\n \
     D to take an item out of the checklist,\n \
     T to clear the terminal,\n \
-    and Q to quit\n"))
+    or Q to quit\n" + bcolors.ENDC))
