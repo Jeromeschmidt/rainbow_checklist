@@ -22,12 +22,12 @@ def destroy(index):
     checklist.pop(index)
 
 def error_message():
-    print("Uh-oh, looks like theres no item there!")
+    print(bcolors.RED + "Uh-oh, looks like theres no item there!" + bcolors.END)
 
 def list_all_items():
     index = 0
     for list_item in checklist:
-        print("{} {}".format(index, list_item))
+        print(bcolors.Yellow + "{} {}".format(index, list_item) + bcolors.END)
         index += 1
 
 def mark_completed(index):
@@ -77,7 +77,7 @@ def select(function_code):
     # Print all items
     elif function_code == "P" or function_code == "p":
         if(len(checklist) < 1):
-            print("Looks like the list is empty!")
+            print(bcolors.RED + "Looks like the list is empty!" + bcolors.END)
         else:
             list_all_items()
         return True
@@ -106,7 +106,7 @@ def select(function_code):
 
     elif function_code == "D" or function_code == "d":
         if(0 >= len(checklist)):
-            print("Looks like the list is empty!")
+            print(bcolors.RED + "Looks like the list is empty!" + bcolors.END)
             return True
         else:
             list_all_items()
@@ -162,19 +162,15 @@ def test():
 
 #color help found at https://stackoverflow.com/questions/287871/how-to-print-colored-text-in-terminal-in-python
 class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[88m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    END = '\033[0m'
 #test()
 # QUESTION:
 running = True
 while running:
-    running = select(user_input(bcolors.OKGREEN + "Press: \n \
+    running = select(user_input(bcolors.GREEN + "Press: \n \
     C to add to list,\n \
     R to Read from list,\n \
     P to display list,\n \
@@ -183,4 +179,4 @@ while running:
     X to unmark an item as completed,\n \
     D to take an item out of the checklist,\n \
     T to clear the terminal,\n \
-    or Q to quit\n" + bcolors.ENDC))
+    or Q to quit\n" + bcolors.END))
